@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Приглашение на свадьбу — Кирилл и Карина</title>
+  <meta name="description" content="Сайт‑приглашение на свадьбу. Дата, место, программа, RSVP.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #fff8f6;
+      --card: #ffffff;
+      --text: #2b2b2b;
+      --muted: #6b6b6b;
+      --brand: #ff7a7a;   /* основной акцент */
+      --brand-2: #ffd3cb; /* нежный розовый */
+      --ok: #1a8f5f;
+      --danger: #b3261e;
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--text);
+      background: radial-gradient(1200px 600px at 90% -10%, var(--brand-2), transparent 60%),
+                  radial-gradient(800px 400px at -10% 20%, #ffe9e3, transparent 60%), var(--bg);
+    }
+    .wrap{max-width: 1080px; margin:0 auto; padding: 24px}
+    header.hero{
+      position:relative; overflow:hidden; border-radius: calc(var(--radius) * 1.5);
+      background: linear-gradient(160deg, #fff, #fff0 60%), url('cover.jpg') center/cover no-repeat, #fbe9e7;
+      box-shadow: var(--shadow);
+      min-height: 70vh; display:flex; align-items:center; justify-content:center; text-align:center;
+    }
+    .hero .inner{padding: 48px 24px 64px; backdrop-filter: blur(2px)}
+    .badge{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius: 999px; background: #ffffffb8; color:var(--muted); font-size:14px; box-shadow: 0 6px 18px rgba(0,0,0,.06)}
+    h1{font-family: "Playfair Display", serif; font-size: clamp(36px, 6vw, 68px); margin: 18px 0 8px}
+    .date{font-size: clamp(16px, 2.5vw, 20px); color: var(--muted)}
+    .cta{
+      margin-top: 28px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center
+    }
+    .btn{appearance:none; border:0; cursor:pointer; padding:14px 18px; border-radius: 14px; font-weight:600; background: var(--brand); color:white; box-shadow: 0 8px 20px rgba(255, 122, 122,.4); transition:.2s transform, .2s box-shadow}
+    .btn:hover{transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255, 122, 122,.5)}
+    .btn.secondary{background:#fff; color:var(--text); border:1px solid #eee; box-shadow: 0 8px 20px rgba(0,0,0,.06)}
+
+    section{margin: 40px 0}
+    .card{background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px}
+
+    .grid{display:grid; gap:18px}
+    @media(min-width:900px){ .grid.cols-3{grid-template-columns: 2fr 1fr 1fr} }
+    @media(min-width:720px){ .grid.cols-2{grid-template-columns: 1.2fr 1fr} }
+
+    h2{font-family: "Playfair Display", serif; font-size: clamp(24px, 4vw, 36px); margin: 0 0 12px}
+    p{line-height:1.65}
+    .muted{color:var(--muted)}
+
+    .timeline{display:grid; gap:10px}
+    .slot{display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid #f1f1f1; padding:14px 16px; border-radius:14px}
+    .time{font-weight:700; min-width:70px}
+
+    .info-list{display:grid; gap:10px}
+    .info-item{display:flex; gap:12px; align-items:flex-start}
+    .dot{width:10px; height:10px; border-radius:50%; background:var(--brand); margin-top:9px}
+
+    .rsvp form{display:grid; gap:12px}
+    .field{display:grid; gap:6px}
+    input, select, textarea{padding:12px 14px; border-radius:12px; border:1px solid #e9e9e9; background:#fff; font:inherit}
+    .note{font-size:14px; color:var(--muted)}
+
+    .map{border:0; width:100%; height: 360px; border-radius: 16px}
+
+    .gallery{display:grid; grid-template-columns: repeat(2,1fr); gap:8px}
+    @media(min-width:720px){ .gallery{grid-template-columns: repeat(4,1fr);} }
+    .gallery img{width:100%; height:200px; object-fit:cover; border-radius: 12px}
+
+    .countdown{display:flex; gap:12px; justify-content:center; margin-top: 10px}
+    .counter{background:#fff; border:1px solid #f0f0f0; border-radius:12px; padding:10px 12px; min-width:64px; text-align:center}
+    .counter .num{font-weight:700; font-size:20px}
+
+    footer{padding:40px 12px 80px; text-align:center; color:var(--muted)}
+    footer .links{display:flex; gap:10px; justify-content:center; flex-wrap:wrap}
+    footer a{color:var(--text)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero" id="top">
+      <div class="inner">
+        <span class="badge">Свадьба • <span id="year">2025</span></span>
+        <h1>Кирилл и Карина</h1>
+        <p class="date"><span id="prettyDate">Суббота, 25 октября 2025</span> • <span id="prettyTime">16:00</span></p>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div class="counter"><div class="num" id="d">–</div><div>дней</div></div>
+          <div class="counter"><div class="num" id="h">–</div><div>часов</div></div>
+          <div class="counter"><div class="num" id="m">–</div><div>мин</div></div>
+          <div class="counter"><div class="num" id="s">–</div><div>сек</div></div>
+        </div>
+        <div class="cta">
+          <a class="btn" href="#rsvp">Подтвердить участие</a>
+          <button class="btn secondary" id="addToCalendar">Добавить в календарь</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid cols-2">
+      <div class="card">
+        <h2>Где и когда</h2>
+        <p><strong>Локация</strong>: Какой-то коттедж, Какой-то адрес, 12</p>
+        <p><strong>Сбор гостей</strong>: 15:30 • <strong>Пьянка</strong>: 16:00 • <strong>Ужин</strong>: 18:00</p>
+        <div class="info-list">
+          <div class="info-item"><span class="dot"></span><div>Парковка у коттеджа на 30 мест</div></div>
+          <div class="info-item"><span class="dot"></span><div>Дресс-код: блатной</div></div>
+          <div class="info-item"><span class="dot"></span><div>Пожалуйста, без букетов. Если хотите — поддержите наш медовый месяц долларом! Ведь букет вянет - а доллар растет:)</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Программа</h2>
+        <div class="timeline">
+          <div class="slot"><div class="time">15:30</div><div>Сбор гостей, велком-дринк</div></div>
+          <div class="slot"><div class="time">16:00</div><div>Церемония</div></div>
+          <div class="slot"><div class="time">17:00</div><div>Фотосессия</div></div>
+          <div class="slot"><div class="time">18:00</div><div>Ужин и танцы</div></div>
+          <div class="slot"><div class="time">22:30</div><div>Торт</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Как добраться</h2>
+      <!-- Замените src на вашу карту. Можно вставить iframe из Google Maps или Яндекс.Карт. -->
+      <iframe class="map" loading="lazy" allowfullscreen
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1998.586831!2d30.31413!3d59.93863!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sru!2sru!4v0000000000"></iframe>
+      <p class="note">Нажмите точку на карте, чтобы построить маршрут.</p>
+    </section>
+
+    <section class="grid cols-3">
+      <div class="card rsvp" id="rsvp">
+        <h2>RSVP</h2>
+        <p class="muted">Пожалуйста, отметьтесь до 1 октября.</p>
+        <!-- По умолчанию форма отправляет письмо через mailto. Замените на Google Form или Formspree — см. комментарии ниже. -->
+        <form id="rsvpForm">
+          <div class="field">
+            <label for="name">Имя и фамилия</label>
+            <input id="name" name="name" required placeholder="Например, Мария Иванова" />
+          </div>
+          <div class="field">
+            <label for="status">Присутствие</label>
+            <select id="status" name="status" required>
+              <option value="Да">Да, приду</option>
+              <option value="Нет">К сожалению, не смогу</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="guests">+1</label>
+            <select id="guests" name="guests">
+              <option value="0">Без сопровождающего</option>
+              <option value="1">Со мной будет +1</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="food">Пожелания по еде</label>
+            <select id="food" name="food">
+              <option value="Не важно">Не важно</option>
+              <option value="Вегетарианец">Вегетарианец</option>
+              <option value="Без глютена">Без глютена</option>
+              <option value="Аллергии">Есть аллергии — напишу ниже</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="msg">Комментарий</label>
+            <textarea id="msg" name="msg" rows="3" placeholder="Аллергии, вопросы, поздравления"></textarea>
+          </div>
+          <button class="btn" type="submit">Отправить</button>
+          <div class="note">Совет: замените обработчик формы на вашу Google Form или endpoint Formspree и собирайте ответы в таблицу.</div>
+          <div id="rsvpStatus" class="note" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Подарки</h2>
+        <p>Самый лучший подарок — вы рядом. Если хотите порадовать нас материально, будем рады взносу на плойку.</p>
+        <div class="info-list">
+          <div class="info-item"><span class="dot"></span><div>Перевод по номеру: +7 950 328 51 69</div></div>
+          <div class="info-item"><span class="dot"></span><div>Комментарий: Кирилл и Карина</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Контакты</h2>
+        <p>По организационным вопросам</p>
+        <div class="info-list">
+          <div class="info-item"><span class="dot"></span><div>Координатор — Карина: <a href="tel:+79373943311">+7 937 394 33 11</a></div></div>
+          <div class="info-item"><span class="dot"></span><div>Телеграм: <a href="https://t.me/username" target="_blank" rel="mikhrina">@username</a></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Немного нас</h2>
+      <p class="muted">тут наши фотки должны быть</p>
+      <div class="gallery">
+        <img src="photo1.jpg" alt="Мы 1" />
+        <img src="photo2.jpg" alt="Мы 2" />
+        <img src="photo3.jpg" alt="Мы 3" />
+        <img src="photo4.jpg" alt="Мы 4" />
+      </div>
+    </section>
+
+    <footer>
+      <div class="links">
+        <a href="#top">Наверх</a>
+        <a id="gCal" href="#">Google Календарь</a>
+      </div>
+      <p>С любовью, Кирилл и Карина</p>
+    </footer>
+  </div>
+
+<script>
+  // === НАСТРОЙКИ САЙТА — поменяйте под себя ===
+  const couple = "Кирилл и Карина";
+  const eventTitle = `Свадьба — ${couple}`;
+  // Укажите точную дату и время по местному часовому поясу
+  const eventDate = new Date("2025-10-25T16:00:00");
+  const eventEnd = new Date("2025-10-25T23:00:00");
+  const venue = "Какой-то коттедж";
+  const venueAddress = "Какой-то адрес";
+  const city = "Казань";
+  const fullAddress = `${venue}, ${venueAddress}, ${city}`;
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // для корректного календаря
+
+  // Шапка: красивый текст даты
+  document.getElementById('year').textContent = eventDate.getFullYear();
+  const prettyDate = eventDate.toLocaleDateString('ru-RU', {weekday:'long', day:'numeric', month:'long'});
+  const prettyTime = eventDate.toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit'});
+  document.getElementById('prettyDate').textContent = prettyDate.charAt(0).toUpperCase() + prettyDate.slice(1);
+  document.getElementById('prettyTime').textContent = prettyTime;
+
+  // Таймер обратного отсчёта
+  function tick(){
+    const now = new Date();
+    let diff = Math.max(0, eventDate - now);
+    const d = Math.floor(diff / (1000*60*60*24)); diff -= d*24*60*60*1000;
+    const h = Math.floor(diff / (1000*60*60)); diff -= h*60*60*1000;
+    const m = Math.floor(diff / (1000*60)); diff -= m*60*1000;
+    const s = Math.floor(diff / 1000);
+    document.getElementById('d').textContent = d;
+    document.getElementById('h').textContent = h;
+    document.getElementById('m').textContent = m;
+    document.getElementById('s').textContent = s;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // Кнопка "Добавить в календарь" — создаём ссылки
+  const gCalLink = (() => {
+    // Google Calendar URL
+    const fmt = (d) => d.toISOString().replace(/[-:]|\.\d{3}/g, '');
+    const dates = `${fmt(eventDate)}/${fmt(eventEnd)}`;
+    const base = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
+    const params = new URLSearchParams({
+      text: eventTitle,
+      dates,
+      details: `Ждём вас! Адрес: ${fullAddress}`,
+      location: fullAddress
+    });
+    return `${base}&${params.toString()}`;
+  })();
+  document.getElementById('gCal').setAttribute('href', gCalLink);
+
+  // .ics файл на лету
+  function buildICS(){
+    function toICSDate(d){
+      const pad = (n) => (n<10? '0'+n : n);
+      const y = d.getUTCFullYear();
+      const m = pad(d.getUTCMonth()+1);
+      const day = pad(d.getUTCDate());
+      const h = pad(d.getUTCHours());
+      const min = pad(d.getUTCMinutes());
+      const s = pad(d.getUTCSeconds());
+      return `${y}${m}${day}T${h}${min}${s}Z`;
+    }
+    const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Wedding//Invite//RU\nBEGIN:VEVENT\nUID:${Date.now()}@invite\nDTSTAMP:${toICSDate(new Date())}\nDTSTART:${toICSDate(eventDate)}\nDTEND:${toICSDate(eventEnd)}\nSUMMARY:${eventTitle}\nLOCATION:${fullAddress}\nDESCRIPTION:Ждём вас!\nEND:VEVENT\nEND:VCALENDAR`;
+    const blob = new Blob([ics], {type:'text/calendar'});
+    const url = URL.createObjectURL(blob);
+    const a = document.getElementById('ics');
+    a.href = url;
+  }
+  buildICS();
+
+  // Кнопка Add to Calendar
+  document.getElementById('addToCalendar').addEventListener('click', () => {
+    window.open(gCalLink, '_blank');
+  });
+
+  // RSVP: по умолчанию формируем письмом. Замените на свой endpoint.
+  // Вариант 1 (простой): mailto с предзаполненным текстом
+  // Вариант 2 (рекомендуется): замените fetch(...) на URL формы Google Apps Script / Formspree
+  const form = document.getElementById('rsvpForm');
+  const statusEl = document.getElementById('rsvpStatus');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // === Вариант 1 — mailto ===
+    const body = `Имя: ${data.name}%0AСтатус: ${data.status}%0A+1: ${data.guests}%0AЕда: ${data.food}%0AКомментарий: ${encodeURIComponent(data.msg||'')}%0A`;
+    const mailto = `mailto:you@example.com?subject=RSVP%20на%20свадьбу&body=${body}`;
+    window.location.href = mailto;
+    statusEl.textContent = 'Открылось письмо. Нажмите отправить.';
+
+    // === Вариант 2 — отправка на сервер ===
+    // Пример:
+    // try{
+    //   const res = await fetch('https://formspree.io/f/XXXXXXXX', {
+    //     method:'POST', headers:{'Content-Type':'application/json'},
+    //     body: JSON.stringify(data)
+    //   });
+    //   if(res.ok){ form.reset(); statusEl.textContent = 'Спасибо! Записали.'; statusEl.style.color = 'var(--ok)'; }
+    //   else { throw new Error('Ошибка отправки'); }
+    // }catch(err){ statusEl.textContent = 'Не удалось отправить. Напишите координатору.'; statusEl.style.color = 'var(--danger)'; }
+  });
+</script>
+</body>
+</html>
